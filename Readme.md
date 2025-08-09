@@ -1,91 +1,58 @@
 # RAG-Based AI Chatbot for General and Domain-Specific Queries
 
-
-## Overview
-This project implements a Retrieval-Augmented Generation (RAG) AI chatbot using LangChain and Streamlit. The chatbot provides two functionalities:
-
-1. **General Knowledge Chatbot**: Uses the Llama model for general question answering.
-2. **Domain-Specific Chatbot**: Trained on a specific corpus to provide precise answers related to the uploaded documents.
-
-The application uses a virtual environment created with `pipenv` and leverages LangChain's APIs to enable accurate and context-aware responses.
+## Introduction
+This repository contains a Retrieval-Augmented Generation (RAG) chatbot built with [LangChain](https://python.langchain.com) and [Streamlit](https://streamlit.io). The application exposes two interaction modes: a general knowledge assistant powered by Groq's Llama model and a document-aware assistant that answers questions from a supplied PDF. Both modes run in the browser via Streamlit and preserve conversation history for the current session.
 
 ## Features
-- General knowledge chatbot using the Llama model.
-- Retrieval-based chatbot trained on specific document(s).
-- Easy-to-use Streamlit interface.
-- Persistent session for historical messages.
+- **General Knowledge Mode:** Uses the Llama model through the `ChatGroq` API to answer open‑ended questions.
+- **Document QA Mode:** Loads a PDF, builds a vector index, and retrieves passages relevant to the user's question.
+- **Streamlit Interface:** Simple web UI with persistent message history within a session.
+- **Environment Isolation:** Dependencies are managed with `pipenv` for reproducible setups.
 
-## Project Structure
-- **`phase.py`**: Implements the general knowledge chatbot.
-- **`phase1.py`**: Implements the domain-specific chatbot with document-based retrieval.
-- **`.env`**: Stores the required API key for the Groq model.
+## Repository Structure
+| File | Description |
+| --- | --- |
+| `phase.py` | Streamlit app for the general knowledge chatbot. |
+| `phase1.py` | Streamlit app for document‑based question answering. |
+| `Research_1.pdf` | Sample document used by `phase1.py`. |
+| `Pipfile`, `Pipfile.lock` | Dependency definitions for `pipenv`. |
 
 ## Prerequisites
-Ensure you have the following installed:
-- Python 3.8+
-- `pipenv` for virtual environment management
-- Required libraries specified in `Pipfile`.
+- Python 3.8 or later
+- [pipenv](https://pipenv.pypa.io/)
+- A Groq API key saved in a `.env` file
 
-## Setup and Installation
-1. Clone the repository:
-   ```bash
-   git clone <repository_url>
-   cd <repository_folder>
-   ```
-2. Create a virtual environment and install dependencies:
-   ```bash
-   pipenv install
-   ```
-3. Activate the virtual environment:
-   ```bash
-   pipenv shell
-   ```
-4. Add your Groq API key to the `.env` file:
-   ```
-   GROQ_API_Key=<your_api_key>
-   ```
+## Installation
+```bash
+git clone https://github.com/Pavankumarmanagoli/Projects.git
+cd Projects/"RAG-Based AI Chatbot for General and Domain-Specific Queries"
+pipenv install
+```
 
-## Running the Application
-1. Run the general knowledge chatbot (`phase.py`):
-   ```bash
-   streamlit run phase.py
-   ```
-2. Run the domain-specific chatbot (`phase1.py`):
-   ```bash
-   streamlit run phase1.py
-   ```
+## Configuration
+Create a file named `.env` in the project root and add:
+```env
+GROQ_API_Key=<your_api_key>
+```
 
-## Usage
-### General Knowledge Chatbot (phase.py)
-- Open the Streamlit app.
-- Enter your query in the input box.
-- The chatbot will respond with contextually accurate answers.
+## Running the Applications
+Activate the virtual environment and launch the desired Streamlit app:
+```bash
+pipenv shell
+streamlit run phase.py      # general knowledge chatbot
+streamlit run phase1.py     # domain-specific chatbot
+```
+Ensure `Research_1.pdf` is available in the project directory when running `phase1.py`.
 
-### Domain-Specific Chatbot (phase1.py)
-- Open the Streamlit app.
-- Ensure the `Research_1.pdf` file is placed in the correct directory (`/Users/pavanmanagoli/Documents/AI_Chatbot_RAG/`).
-- Enter your query in the input box.
-- The chatbot will retrieve and answer based on the document content.
-
-## Code Breakdown
-### phase.py
-- **LangChain Integration**: Uses the `ChatGroq` class with the Llama model to generate answers.
-- **Session Management**: Streamlit manages user interactions and displays historical messages.
-- **Prompt Template**: A predefined prompt ensures consistent responses.
-
-### phase1.py
-- **Document Loader**: Loads PDF files using `PyPDFLoader`.
-- **Vector Database**: Uses `VectorstoreIndexCreator` to create embeddings from the document.
-- **Retrieval QA**: Enables retrieval-augmented responses from the vector database.
-
-## Troubleshooting
-- Ensure the `.env` file contains the correct API key.
-- Verify the path to `Research_1.pdf` is correct in `phase1.py`.
-- Check Python and library versions to match the project requirements.
+## Usage Tips
+- Ask concise, direct questions for best results.
+- In Document QA mode, limit queries to the scope of the provided PDF.
+- Restart the Streamlit app to clear the session history.
 
 ## Future Enhancements
-- Add support for multiple documents.
-- Enhance the Streamlit UI with file upload functionality.
-- Integrate additional language models for improved performance.
+- Support for indexing multiple documents.
+- File upload capability directly from the Streamlit interface.
+- Integration with additional large language models.
 
-
+## License
+This project is released under the MIT License.
