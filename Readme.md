@@ -24,7 +24,7 @@ This repository contains a Retrieval-Augmented Generation (RAG) chatbot built wi
 
 ## Installation
 ```bash
-git clone https://github.com/Pavankumarmanagoli/Projects.git
+git clone [https://github.com/Pavankumarmanagoli/Projects.git](https://github.com/Pavankumarmanagoli/RAG-Based-AI-Chatbot-for-General-and-Domain-Specific-Queries)
 cd Projects/"RAG-Based AI Chatbot for General and Domain-Specific Queries"
 pipenv install
 ```
